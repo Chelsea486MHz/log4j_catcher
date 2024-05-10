@@ -1,6 +1,5 @@
 import asyncore
 import base64
-
 import requests
 import logging
 import time
@@ -13,7 +12,7 @@ from threading import Thread
 from phorcys.decoders.deepdecoder import DeepDecoder
 from phorcys.inspectors.yara_inspector import YaraInspector
 
-HOST = ''
+HOST = '0.0.0.0'
 PORT = 8080
 
 dn = {
@@ -52,7 +51,7 @@ class Handler(asyncore.dispatcher_with_send):
         self.inspector = YaraInspector(open('log4j_exploit.yara', 'r').read())
 
     def handle_read(self):
-        data = self.recv(16384).strip()
+        data = self.recv(os.environ.get("REQUEST_BUFFER")).strip()
         if data:
             if not data:
                 return

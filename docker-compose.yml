@@ -1,11 +1,10 @@
 services:
   log4j_catcher:
     container_name: log4j_catcher
-    image: log4j_catcher
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     ports:
       - "25565:8080"
     volumes:
-      - ./log4j_catcher:/app
+      - ./log4j_catcher:/home/detector/logs
+    environment:
+      REQUEST_BUFFER: 16384
