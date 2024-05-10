@@ -1,0 +1,11 @@
+services:
+  log4j_catcher:
+    container_name: log4j_catcher
+    image: log4j_catcher
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./log4j_catcher:/app
